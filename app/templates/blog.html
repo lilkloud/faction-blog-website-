@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Blog Header -->
+<section class="py-5 bg-light">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold mb-3" style="font-family: 'Cormorant Garamond', serif;">Style Journal</h1>
+        <p class="lead text-muted mb-4">Discover the latest fashion trends, beauty tips, and lifestyle inspiration</p>
+        <div class="d-flex justify-content-center gap-2">
+            <a href="#trending" class="btn btn-outline-dark px-4">Trending</a>
+            <a href="#latest" class="btn btn-outline-dark px-4">Latest</a>
+            <a href="#popular" class="btn btn-outline-dark px-4">Popular</a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Post -->
+<section class="py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <div class="position-relative overflow-hidden rounded-4" style="height: 100%; min-height: 400px;">
+                    <img src="https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                         class="w-100 h-100 object-fit-cover" 
+                         alt="Fashion Trends">
+                    <div class="position-absolute bottom-0 start-0 p-4 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%); width: 100%;">
+                        <span class="badge bg-primary mb-2">Trending</span>
+                        <h2 class="h3 mb-3">Spring/Summer 2024: The Ultimate Style Guide</h2>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle me-2" width="32" height="32" alt="Author">
+                            <span class="me-3">Sarah Johnson</span>
+                            <small class="text-white-50">May 15, 2024</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card border-0 h-100">
+                            <div class="position-relative" style="height: 180px; overflow: hidden;">
+                                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                     class="card-img-top h-100 w-100 object-fit-cover" 
+                                     alt="Beauty Tips">
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-danger bg-opacity-10 text-danger mb-2">Beauty</span>
+                                <h5 class="card-title">10-Minute Makeup Routine for Busy Mornings</h5>
+                                <p class="card-text text-muted small">Quick and easy makeup tips for when you're in a rush.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-0 h-100">
+                            <div class="position-relative" style="height: 180px; overflow: hidden;">
+                                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                     class="card-img-top h-100 w-100 object-fit-cover" 
+                                     alt="Lifestyle">
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-success bg-opacity-10 text-success mb-2">Lifestyle</span>
+                                <h5 class="card-title">5 Ways to Create a Cozy Home Sanctuary</h5>
+                                <p class="card-text text-muted small">Transform your space into a peaceful retreat with these simple tips.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card border-0 bg-light">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                         class="img-fluid rounded-start h-100 object-fit-cover" 
+                                         alt="Fashion Accessories">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <span class="badge bg-warning bg-opacity-10 text-warning mb-2">Accessories</span>
+                                        <h5 class="card-title">Must-Have Accessories to Elevate Any Outfit</h5>
+                                        <p class="card-text text-muted small">The perfect accessories can transform your look from ordinary to extraordinary.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Articles -->
+<section class="py-5 bg-white" id="latest">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 mb-0" style="font-family: 'Cormorant Garamond', serif;">Latest Articles</h2>
+            <a href="#" class="text-decoration-none small">View All <i class="bi bi-arrow-right ms-1"></i></a>
+        </div>
+        <div class="row g-4">
+            {% for post in posts.items %}
+            <div class="col-md-6 col-lg-4">
+                <article class="card h-100 border-0 shadow-sm overflow-hidden">
+                    <div class="position-relative" style="height: 200px; overflow: hidden;">
+                        <img src="{{ post.image_url or 'https://source.unsplash.com/random/600x400?fashion&' + loop.index|string }}" 
+                             class="card-img-top h-100 w-100 object-fit-cover" 
+                             alt="{{ post.title }}">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <button class="btn btn-sm btn-light rounded-circle p-2" title="Save for later">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" 
+                                 class="rounded-circle me-2" width="32" height="32" alt="{{ post.author.username }}">
+                            <span class="text-muted small">{{ post.author.username }}</span>
+                            <span class="text-muted small mx-2">•</span>
+                            <span class="text-muted small">{{ post.date_posted.strftime('%b %d, %Y') }}</span>
+                        </div>
+                        <h5 class="card-title">
+                            <a href="{{ url_for('main.post', post_id=post.id) }}" class="text-decoration-none">{{ post.title }}</a>
+                        </h5>
+                        <p class="card-text text-muted small mb-3">{{ post.content|striptags|truncate(120) }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <a href="{{ url_for('main.post', post_id=post.id) }}" class="text-decoration-none d-flex align-items-center">
+                                Read More <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-link text-muted p-0 me-2" title="Like">
+                                    <i class="bi bi-heart"></i> <small>{{ post.likes|default(0, true) }}</small>
+                                </button>
+                                <button class="btn btn-link text-muted p-0" title="Comments">
+                                    <i class="bi bi-chat"></i> <small>{{ post.comments|length|default(0, true) }}</small>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if posts.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('main.blog', page=posts.prev_num) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span>
+                    </li>
+                {% endif %}
+                
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if posts.page == page_num %}
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">{{ page_num }}</span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ url_for('main.blog', page=page_num) }}">{{ page_num }}</a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if posts.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('main.blog', page=posts.next_num) }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;</span>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Popular Tags -->
+<section class="py-5 bg-light" id="popular">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="h4" style="font-family: 'Cormorant Garamond', serif;">Popular Topics</h2>
+            <p class="text-muted">Discover more about what interests you</p>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">#SpringTrends</a>
+            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">#BeautyHacks</a>
+            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">#SustainableFashion</a>
+            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">#HomeDecor</a>
+            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">#OOTD</a>
+            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">#SelfCare</a>
+            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">#MakeupTutorials</a>
+            <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">#FashionWeek</a>
+        </div>
+    </div>
+</section>
+
+<!-- Instagram Feed -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="h4" style="font-family: 'Cormorant Garamond', serif;">Follow on Instagram</h2>
+            <p class="text-muted">@styleandgrace</p>
+        </div>
+        <div class="row g-3">
+            {% for i in range(6) %}
+            <div class="col-4 col-md-2">
+                <a href="#" class="d-block position-relative instagram-hover">
+                    <img src="https://source.unsplash.com/random/400x400?fashion,beauty,lifestyle&{{ i }}" 
+                         class="img-fluid w-100" 
+                         alt="Instagram post">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-50 text-white opacity-0 hover-opacity-100 transition">
+                        <i class="bi bi-heart-fill me-2"></i>
+                        <span>{{ (i+1) * 24 }}</span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <i class="bi bi-envelope-paper-heart display-4 mb-3"></i>
+                <h2 class="mb-4">Join Our Style Community</h2>
+                <p class="lead mb-4">Subscribe to receive exclusive content, style tips, and special offers directly in your inbox.</p>
+                <form class="row g-2 justify-content-center">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="email" class="form-control form-control-lg" placeholder="Your email address" required>
+                            <button class="btn btn-light px-4" type="submit">Subscribe</button>
+                        </div>
+                        <div class="form-text text-white-50 mt-2">We respect your privacy. Unsubscribe at any time.</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

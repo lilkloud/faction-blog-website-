@@ -1,0 +1,147 @@
+<div class="like-section" data-post-id="{{ post.id }}">
+    <button class="btn btn-sm btn-outline-primary like-button" 
+            data-post-id="{{ post.id }}"
+            {% if not current_user.is_authenticated %}disabled title="Login to like"{% endif %}>
+        <i class="bi {% if current_user.is_authenticated and post.is_liked_by(current_user) %}bi-heart-fill text-danger{% else %}bi-heart{% endif %}"></i>
+        <span class="like-count">{{ post.likes.count() }}</span>
+    </button>
+    
+    {% if post.likes.count() > 0 %}
+    <div class="likes-popover">
+        <div class="likes-list d-none">
+            <div class="list-group">
+                {% for like in post.likes.limit(10).all() %}
+                <a href="{{ url_for('user.profile', username=like.user.username) }}" 
+                   class="list-group-item list-group-item-action">
+                    <img src="{{ url_for('static', filename='profile_pics/' + like.user.image_file) }}" 
+                         class="rounded-circle me-2" width="25" height="25"
+                         onerror="this.onerror=null; this.src='{{ url_for('static', filename='profile_pics/default.jpg') }}'">
+                    {{ like.user.username }}
+                </a>
+                {% endfor %}
+                {% if post.likes.count() > 10 %}
+                <div class="list-group-item text-muted">
+                    And {{ post.likes.count() - 10 }} more...
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle like button click
+    document.querySelectorAll('.like-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const postId = this.dataset.postId;
+            const likeSection = this.closest('.like-section');
+            const likeIcon = this.querySelector('i');
+            const likeCount = this.querySelector('.like-count');
+            
+            fetch(`/like/${postId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': '{{ csrf_token() }}'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.liked) {
+                    likeIcon.classList.remove('bi-heart');
+                    likeIcon.classList.add('bi-heart-fill', 'text-danger');
+                } else {
+                    likeIcon.classList.remove('bi-heart-fill', 'text-danger');
+                    likeIcon.classList.add('bi-heart');
+                }
+                likeCount.textContent = data.likes_count;
+                
+                // Update likes popover if it exists
+                const likesPopover = likeSection.querySelector('.likes-popover');
+                if (likesPopover) {
+                    fetch(`/post/${postId}/likes`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Update likes list here if needed
+                        });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while processing your like.');
+            });
+        });
+    });
+    
+    // Show likes popover on hover
+    document.querySelectorAll('.likes-popover').forEach(popover => {
+        const button = popover.previousElementSibling;
+        const tooltip = popover.querySelector('.likes-list');
+        
+        button.addEventListener('mouseenter', () => {
+            tooltip.classList.remove('d-none');
+            // Position the tooltip
+            const rect = button.getBoundingClientRect();
+            tooltip.style.position = 'absolute';
+            tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
+            tooltip.style.left = `${rect.left + window.scrollX}px`;
+            tooltip.style.zIndex = '1000';
+        });
+        
+        popover.addEventListener('mouseleave', () => {
+            tooltip.classList.add('d-none');
+        });
+    });
+});
+</script>
+
+<style>
+.like-button {
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.like-button:hover {
+    transform: scale(1.1);
+}
+
+.like-button:active {
+    transform: scale(0.95);
+}
+
+.likes-popover {
+    position: relative;
+    display: inline-block;
+}
+
+.likes-list {
+    position: absolute;
+    min-width: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.likes-list .list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.likes-list .list-group-item:first-child {
+    border-top: none;
+}
+
+.likes-list .list-group-item:last-child {
+    border-bottom: none;
+}
+</style>

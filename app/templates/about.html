@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+{% from "components/hero.html" import hero %}
+
+{% block content %}
+<!-- About Hero Section -->
+{{ hero(
+    title="Welcome to NEXUS Fashion",
+    subtitle="Your ultimate destination for fashion inspiration, beauty secrets, and lifestyle tips to help you look and feel your best every day.",
+    image_url=url_for('static', filename='images/about-hero.jpg'),
+    height='70vh',
+    container_class='position-relative z-2 py-5 d-flex align-items-center',
+    content_class='text-center text-white'
+) }}
+
+<!-- About Content Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center mb-5">
+                <span class="badge bg-primary bg-opacity-20 text-primary mb-3 px-3 py-2 rounded-pill">Our Story</span>
+                <p class="lead">Founded with a passion for style and self-expression, NEXUS Fashion has evolved from a personal style diary to a thriving community of fashion enthusiasts. We believe that fashion is more than just clothing—it's a form of self-expression and confidence.</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 bg-dark bg-opacity-10 p-4 h-100">
+                    <div class="text-primary mb-3">
+                        <i class="bi bi-stars fs-1"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To inspire confidence through style and help you express your unique personality through fashion.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-dark bg-opacity-10 p-4 h-100">
+                    <div class="text-primary mb-3">
+                        <i class="bi bi-eye fs-1"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To be the go-to destination for fashion inspiration and style guidance for the modern individual.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 bg-dark bg-opacity-10 p-4 h-100">
+                    <div class="text-primary mb-3">
+                        <i class="bi bi-heart fs-1"></i>
+                    </div>
+                    <h3>Our Values</h3>
+                    <p>Authenticity, creativity, and inclusivity are at the heart of everything we do.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5 bg-dark bg-opacity-10">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 col-6 text-center">
+                <div class="display-4 fw-bold text-primary">500+</div>
+                <div class="text-muted">Style Guides</div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+                <div class="display-4 fw-bold text-primary">100K+</div>
+                <div class="text-muted">Monthly Readers</div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+                <div class="display-4 fw-bold text-primary">10+</div>
+                <div class="text-muted">Years Experience</div>
+            </div>
+            <div class="col-md-3 col-6 text-center">
+                <div class="display-4 fw-bold text-primary">50+</div>
+                <div class="text-muted">Brand Partners</div>
+            </div>
+        </div>
+    </div>
+</section>
+                
+                <div class="mt-4">
+                    <a href="#featured" class="btn btn-primary me-2">Explore Our Content</a>
+                    <a href="#contact" class="btn btn-outline-primary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="About Style & Grace" class="img-fluid rounded-4 shadow">
+                    <div class="position-absolute top-0 start-0 bg-white p-3 rounded-end rounded-top shadow-sm d-flex align-items-center">
+                        <div class="bg-primary bg-opacity-10 p-2 rounded-circle me-2">
+                            <i class="bi bi-award-fill text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">Featured In</div>
+                            <div class="small text-muted">Vogue, Elle, Harper's Bazaar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Philosophy -->
+<section class="py-5 bg-light" id="philosophy">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <span class="badge bg-primary bg-opacity-10 text-primary mb-3 px-3 py-2 rounded-pill">Our Philosophy</span>
+                <h2 class="mb-5">Style is a way to say who you are without having to speak</h2>
+                <p class="lead mb-5">At Style & Grace, we believe that fashion is a powerful form of self-expression. Our mission is to inspire confidence through style, beauty, and self-care, helping you create a life you love—one outfit at a time.</p>
+                
+                <div class="row g-4 mt-4">
+                    <div class="col-md-4">
+                        <div class="p-4 bg-white rounded-4 h-100" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                <i class="bi bi-stars" style="font-size: 1.75rem;"></i>
+                            </div>
+                            <h4 class="h5 mb-3">Style First</h4>
+                            <p class="text-muted mb-0">Discover curated fashion trends, styling tips, and wardrobe essentials to elevate your personal style.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 bg-white rounded-4 h-100" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                <i class="bi bi-flower1" style="font-size: 1.75rem;"></i>
+                            </div>
+                            <h4 class="h5 mb-3">Beauty Inside Out</h4>
+                            <p class="text-muted mb-0">Explore beauty routines, skincare secrets, and wellness tips for radiant confidence.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 bg-white rounded-4 h-100" data-aos="fade-up" data-aos-delay="300">
+                            <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                <i class="bi bi-heart" style="font-size: 1.75rem;"></i>
+                            </div>
+                            <h4 class="h5 mb-3">Live Beautifully</h4>
+                            <p class="text-muted mb-0">Embrace a lifestyle of intention, joy, and self-expression in every aspect of your life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Meet the Team -->
+<section class="py-5 my-5" id="team">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="badge bg-primary bg-opacity-10 text-primary mb-3 px-3 py-2 rounded-pill">Our Experts</span>
+            <h2>Meet Our Stylists</h2>
+            <p class="lead">The creative minds behind Style & Grace</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 overflow-hidden" data-aos="fade-up">
+                    <div class="team-img-container">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
+                             class="card-img-top" alt="Emma Wilson">
+                        <div class="team-social">
+                            <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="text-white me-2"><i class="bi bi-pinterest"></i></a>
+                            <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center p-4">
+                        <h4 class="card-title mb-1">Emma Wilson</h4>
+                        <p class="text-primary mb-3">Fashion Director</p>
+                        <p class="card-text text-muted">With over 10 years in the fashion industry, Emma brings a wealth of knowledge about trends, styling, and personal branding.</p>
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                            <a href="#" class="btn btn-primary btn-sm">Book Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-img-container">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                             class="card-img-top" alt="James Rodriguez">
+                        <div class="team-social">
+                            <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="text-white me-2"><i class="bi bi-pinterest"></i></a>
+                            <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center p-4">
+                        <h4 class="card-title mb-1">James Rodriguez</h4>
+                        <p class="text-primary mb-3">Beauty Editor</p>
+                        <p class="card-text text-muted">A certified skincare specialist, James is passionate about clean beauty and helping people feel confident in their own skin.</p>
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                            <a href="#" class="btn btn-primary btn-sm">Book Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mx-auto">
+                <div class="card border-0 shadow-sm h-100 overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-img-container">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" 
+                             class="card-img-top" alt="Sophia Chen">
+                        <div class="team-social">
+                            <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="text-white me-2"><i class="bi bi-pinterest"></i></a>
+                            <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center p-4">
+                        <h4 class="card-title mb-1">Sophia Chen</h4>
+                        <p class="text-primary mb-3">Lifestyle Editor</p>
+                        <p class="card-text text-muted">Sophia specializes in creating content that blends fashion, wellness, and mindful living for a balanced lifestyle.</p>
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
+                            <a href="#" class="btn btn-primary btn-sm">Book Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white" id="contact">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Ready to Elevate Your Style?</h2>
+                <p class="lead mb-4">Join our community of fashion enthusiasts and get exclusive style tips, early access to content, and special offers.</p>
+                <form class="row g-2 justify-content-center">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="email" class="form-control form-control-lg" placeholder="Your email address" required>
+                            <button class="btn btn-light text-primary px-4" type="submit">Subscribe</button>
+                        </div>
+                    </div>
+                </form>
+                <p class="small mt-3 mb-0 opacity-75">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Join Our Community -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="mb-4">Join Our Community</h2>
+                <p class="lead mb-5">Be part of our growing community of readers and contributors. Share your story, connect with like-minded individuals, and never miss an update.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg px-4">Subscribe Now</a>
+                    <a href="{{ url_for('main.contact') }}" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

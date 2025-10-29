@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Style Guides Header -->
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Style Guides</h1>
+        <p class="lead">Discover curated fashion collections, styling tips, and beauty essentials</p>
+    </div>
+</section>
+
+<!-- Style Categories -->
+<section class="py-4 bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center">
+                    <div class="btn-group flex-wrap" role="group" aria-label="Style categories">
+                        <button type="button" class="btn btn-outline-primary active mb-2" data-filter="all">All</button>
+                        <button type="button" class="btn btn-outline-primary mb-2" data-filter="collections">Collections</button>
+                        <button type="button" class="btn btn-outline-primary mb-2" data-filter="styling">Styling Tips</button>
+                        <button type="button" class="btn btn-outline-primary mb-2" data-filter="beauty">Beauty</button>
+                        <button type="button" class="btn btn-outline-primary mb-2" data-filter="accessories">Accessories</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Style Guides Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4" id="style-guides-container">
+            <!-- Style Guide 1 -->
+            <div class="col-md-6 col-lg-4" data-category="collections">
+                <article class="card h-100 border-0 shadow-sm overflow-hidden style-guide-card">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Spring Collection 2024">
+                        <div class="style-overlay">
+                            <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                <i class="bi bi-eye me-1"></i> View Guide
+                            </a>
+                            <button class="btn btn-sm btn-light btn-save" data-bs-toggle="tooltip" title="Save for later">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">Collection</span>
+                            <small class="text-muted">April 15, 2024</small>
+                        </div>
+                        <h5 class="card-title">Spring 2024 Collection</h5>
+                        <p class="card-text text-muted">Discover the must-have pieces and styling ideas for the season's hottest trends.</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="avatar-sm me-2">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle" width="32" alt="Author">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Emma Wilson</h6>
+                                <small class="text-muted">Fashion Director</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-like btn-sm me-2">
+                                    <i class="bi bi-heart"></i>
+                                    <span class="like-count">128</span>
+                                </button>
+                                <a href="#" class="text-muted text-decoration-none me-3">
+                                    <i class="bi bi-chat me-1"></i> 24
+                                </a>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Style Guide 2 -->
+            <div class="col-md-6 col-lg-4" data-category="styling">
+                <article class="card h-100 border-0 shadow-sm overflow-hidden style-guide-card">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Capsule Wardrobe">
+                        <div class="style-overlay">
+                            <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                <i class="bi bi-eye me-1"></i> View Guide
+                            </a>
+                            <button class="btn btn-sm btn-light btn-save" data-bs-toggle="tooltip" title="Save for later">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">Styling Tips</span>
+                            <small class="text-muted">March 28, 2024</small>
+                        </div>
+                        <h5 class="card-title">Capsule Wardrobe Essentials</h5>
+                        <p class="card-text text-muted">Build a versatile capsule wardrobe with these 30 essential pieces that never go out of style.</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="avatar-sm me-2">
+                                <img src="https://randomuser.me/api/portraits/women/45.jpg" class="rounded-circle" width="32" alt="Author">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Sophia Chen</h6>
+                                <small class="text-muted">Style Editor</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-like btn-sm me-2">
+                                    <i class="bi bi-heart"></i>
+                                    <span class="like-count">215</span>
+                                </button>
+                                <a href="#" class="text-muted text-decoration-none me-3">
+                                    <i class="bi bi-chat me-1"></i> 42
+                                </a>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Style Guide 3 -->
+            <div class="col-md-6 col-lg-4" data-category="beauty">
+                <article class="card h-100 border-0 shadow-sm overflow-hidden style-guide-card">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13de241667?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Skincare Routine">
+                        <div class="style-overlay">
+                            <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                <i class="bi bi-eye me-1"></i> View Guide
+                            </a>
+                            <button class="btn btn-sm btn-light btn-save" data-bs-toggle="tooltip" title="Save for later">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">Beauty</span>
+                            <small class="text-muted">March 15, 2024</small>
+                        </div>
+                        <h5 class="card-title">10-Step Korean Skincare Routine</h5>
+                        <p class="card-text text-muted">Achieve glass skin with this comprehensive guide to the famous Korean skincare routine.</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="avatar-sm me-2">
+                                <img src="https://randomuser.me/api/portraits/women/28.jpg" class="rounded-circle" width="32" alt="Author">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Mia Johnson</h6>
+                                <small class="text-muted">Beauty Editor</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-like btn-sm me-2">
+                                    <i class="bi bi-heart"></i>
+                                    <span class="like-count">342</span>
+                                </button>
+                                <a href="#" class="text-muted text-decoration-none me-3">
+                                    <i class="bi bi-chat me-1"></i> 67
+                                </a>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Style Guide 4 -->
+            <div class="col-md-6 col-lg-4" data-category="accessories">
+                <article class="card h-100 border-0 shadow-sm overflow-hidden style-guide-card">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Accessories">
+                        <div class="style-overlay">
+                            <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                <i class="bi bi-eye me-1"></i> View Guide
+                            </a>
+                            <button class="btn btn-sm btn-light btn-save" data-bs-toggle="tooltip" title="Save for later">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">Accessories</span>
+                            <small class="text-muted">March 5, 2024</small>
+                        </div>
+                        <h5 class="card-title">Statement Jewelry for Every Occasion</h5>
+                        <p class="card-text text-muted">Elevate your look with these bold and beautiful jewelry pieces that make a statement.</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="avatar-sm me-2">
+                                <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle" width="32" alt="Author">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Emma Wilson</h6>
+                                <small class="text-muted">Fashion Director</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-like btn-sm me-2">
+                                    <i class="bi bi-heart"></i>
+                                    <span class="like-count">178</span>
+                                </button>
+                                <a href="#" class="text-muted text-decoration-none me-3">
+                                    <i class="bi bi-chat me-1"></i> 31
+                                </a>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Style Guide 5 -->
+            <div class="col-md-6 col-lg-4" data-category="styling">
+                <article class="card h-100 border-0 shadow-sm overflow-hidden style-guide-card">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1561526116-e2463f7f2a59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Business Casual">
+                        <div class="style-overlay">
+                            <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                <i class="bi bi-eye me-1"></i> View Guide
+                            </a>
+                            <button class="btn btn-sm btn-light btn-save" data-bs-toggle="tooltip" title="Save for later">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">Styling Tips</span>
+                            <small class="text-muted">February 22, 2024</small>
+                        </div>
+                        <h5 class="card-title">Business Casual: Office to Evening</h5>
+                        <p class="card-text text-muted">Transition seamlessly from office to after-work events with these versatile outfit ideas.</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="avatar-sm me-2">
+                                <img src="https://randomuser.me/api/portraits/women/45.jpg" class="rounded-circle" width="32" alt="Author">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Sophia Chen</h6>
+                                <small class="text-muted">Style Editor</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-like btn-sm me-2">
+                                    <i class="bi bi-heart"></i>
+                                    <span class="like-count">264</span>
+                                </button>
+                                <a href="#" class="text-muted text-decoration-none me-3">
+                                    <i class="bi bi-chat me-1"></i> 53
+                                </a>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Style Guide 6 -->
+            <div class="col-md-6 col-lg-4" data-category="beauty">
+                <article class="card h-100 border-0 shadow-sm overflow-hidden style-guide-card">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="Natural Makeup">
+                        <div class="style-overlay">
+                            <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                <i class="bi bi-eye me-1"></i> View Guide
+                            </a>
+                            <button class="btn btn-sm btn-light btn-save" data-bs-toggle="tooltip" title="Save for later">
+                                <i class="bi bi-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">Beauty</span>
+                            <small class="text-muted">February 10, 2024</small>
+                        </div>
+                        <h5 class="card-title">Natural Makeup for Everyday Glow</h5>
+                        <p class="card-text text-muted">Achieve a fresh-faced, no-makeup makeup look with these essential products and techniques.</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="avatar-sm me-2">
+                                <img src="https://randomuser.me/api/portraits/women/28.jpg" class="rounded-circle" width="32" alt="Author">
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Mia Johnson</h6>
+                                <small class="text-muted">Beauty Editor</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-like btn-sm me-2">
+                                    <i class="bi bi-heart"></i>
+                                    <span class="like-count">198</span>
+                                </button>
+                                <a href="#" class="text-muted text-decoration-none me-3">
+                                    <i class="bi bi-chat me-1"></i> 29
+                                </a>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="p-4 p-lg-5 bg-white rounded-4 shadow-sm">
+                    <h2 class="h1 mb-4">Get Style Tips & Updates</h2>
+                    <p class="lead mb-4">Subscribe to our newsletter for the latest fashion trends, styling advice, and exclusive content delivered straight to your inbox.</p>
+                    <form id="newsletterForm" class="row g-2 justify-content-center">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="email" class="form-control form-control-lg" placeholder="Your email address" required>
+                                <button class="btn btn-primary px-4" type="submit">Subscribe</button>
+                            </div>
+                            <div class="form-text mt-2">We respect your privacy. Unsubscribe at any time.</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        <a href="{{ url_for('main.home') }}#contact" class="btn btn-light btn-lg">
+            <i class="bi bi-chat-left-text me-2"></i>Let's Talk
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    // Project filtering
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('[data-filter]');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.closest('[data-category]').getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        // Add animation
+                        card.style.animation = 'fadeIn 0.5s ease-in-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .project-card:hover .project-overlay {
+        opacity: 1;
+    }
+</style>
+{% endblock %}

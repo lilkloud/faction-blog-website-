@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Category Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-5 fw-bold">Category: {{ category_name|title }}</h1>
+                <p class="lead text-muted">
+                    {% if posts.total > 0 %}
+                        {{ posts.total }} article{% if posts.total > 1 %}s{% endif %} found
+                    {% else %}
+                        No articles found in this category
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Category Posts -->
+<section class="py-5">
+    <div class="container">
+        {% if posts.items %}
+        <div class="row g-4">
+            {% for post in posts.items %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <a href="{{ url_for('main.post', post_id=post.id) }}" class="text-decoration-none">
+                        <img src="{{ post.image_url if post.image_url else url_for('static', filename='images/default-post.jpg') }}" 
+                             class="card-img-top" alt="{{ post.title }}" style="height: 200px; object-fit: cover;">
+                    </a>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary me-2">{{ post.category|title }}</span>
+                            <small class="text-muted">{{ post.date_posted.strftime('%B %d, %Y') }}</small>
+                        </div>
+                        <h3 class="h5 card-title">
+                            <a href="{{ url_for('main.post', post_id=post.id) }}" class="text-decoration-none text-dark">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+                        <p class="card-text text-muted">{{ post.content|striptags|truncate(120) }}</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <img src="{{ url_for('static', filename='images/default-avatar.png') }}" 
+                                 alt="Author" class="rounded-circle me-2" width="32" height="32">
+                            <small class="text-muted">By {{ post.author.username }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if posts.pages > 1 %}
+        <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if posts.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.category', category_name=category_name, page=posts.prev_num) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+                {% endif %}
+
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if posts.page == page_num %}
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('main.category', category_name=category_name, page=page_num) }}">{{ page_num }}</a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.category', category_name=category_name, page=posts.next_num) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+        {% else %}
+        <div class="text-center py-5">
+            <div class="mb-4">
+                <i class="bi bi-journal-x display-1 text-muted"></i>
+            </div>
+            <h3 class="h4">No articles found in this category</h3>
+            <p class="text-muted">Check back later for new content in this category.</p>
+            <a href="{{ url_for('main.home') }}" class="btn btn-primary mt-3">
+                <i class="bi bi-arrow-left me-2"></i>Back to Home
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    // Add any category-specific JavaScript here
+    document.addEventListener('DOMContentLoaded', function() {
+        // Smooth scroll to top when paginating
+        document.querySelectorAll('.page-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

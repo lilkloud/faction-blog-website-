@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.username }}'s Profile - Style & Grace{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <div class="position-relative d-inline-block mb-3">
+                        <img src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" 
+                             class="rounded-circle img-thumbnail" 
+                             alt="{{ user.username }}"
+                             style="width: 150px; height: 150px; object-fit: cover;">
+                        {% if current_user == user %}
+                        <a href="{{ url_for('user.edit_profile') }}" 
+                           class="btn btn-sm btn-primary position-absolute bottom-0 end-0 rounded-circle"
+                           style="width: 40px; height: 40px; line-height: 40px;">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <h3 class="h4 mb-1">{{ user.username }}</h3>
+                    
+                    {% if user.about_me %}
+                        <p class="text-muted mb-3">{{ user.about_me }}</p>
+                    {% endif %}
+                    
+                    <div class="d-flex justify-content-center gap-3 mb-3">
+                        {% if user.location %}
+                        <div>
+                            <i class="bi bi-geo-alt text-muted"></i>
+                            <span class="ms-1">{{ user.location }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        <div>
+                            <i class="bi bi-calendar-check text-muted"></i>
+                            <span class="ms-1">Joined {{ user.member_since.strftime('%B %Y') }}</span>
+                        </div>
+                    </div>
+                    
+                    {% if user.website %}
+                    <div class="mb-3">
+                        <a href="{{ user.website }}" target="_blank" class="text-decoration-none">
+                            <i class="bi bi-globe"></i> {{ user.website }}
+                        </a>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-envelope"></i> Message
+                        </a>
+                        {% if current_user == user %}
+                        <a href="{{ url_for('user.account') }}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-gear"></i> Settings
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="card-footer bg-transparent">
+                    <div class="d-flex justify-content-between small text-muted">
+                        <div>
+                            <i class="bi bi-file-text"></i> 
+                            {{ user.posts|length }} posts
+                        </div>
+                        <div>
+                            <i class="bi bi-chat-dots"></i> 
+                            {{ user.comments|length }} comments
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% if current_user == user %}
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0">Quick Actions</h6>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{{ url_for('posts.new_post') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-plus-circle me-2"></i> New Post
+                    </a>
+                    <a href="{{ url_for('user.drafts') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-file-earmark-text me-2"></i> Drafts
+                    </a>
+                    <a href="{{ url_for('user.settings') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-gear me-2"></i> Account Settings
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <!-- Navigation Tabs -->
+            <ul class="nav nav-tabs mb-4" id="profileTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" 
+                            data-bs-target="#posts" type="button" role="tab" aria-controls="posts" 
+                            aria-selected="true">
+                        Posts
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="comments-tab" data-bs-toggle="tab" 
+                            data-bs-target="#comments" type="button" role="tab" 
+                            aria-controls="comments" aria-selected="false">
+                        Comments
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="likes-tab" data-bs-toggle="tab" 
+                            data-bs-target="#likes" type="button" role="tab" 
+                            aria-controls="likes" aria-selected="false">
+                        Likes
+                    </button>
+                </li>
+            </ul>
+            
+            <!-- Tab Content -->
+            <div class="tab-content" id="profileTabsContent">
+                <!-- Posts Tab -->
+                <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                    <div class="mb-4">
+                        <h4 class="h5 mb-3">Latest Posts</h4>
+                        {% if user.posts %}
+                            {% for post in user.posts %}
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="{{ post.image_url if post.image_url else url_for('static', filename='images/default-post.jpg') }}" 
+                                             class="img-fluid rounded-start h-100" 
+                                             alt="{{ post.title }}"
+                                             style="object-fit: cover; min-height: 120px;">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title h6">
+                                                <a href="{{ url_for('posts.post', post_id=post.id) }}" 
+                                                   class="text-decoration-none text-dark">
+                                                    {{ post.title }}
+                                                </a>
+                                            </h5>
+                                            <p class="card-text small text-muted">
+                                                {{ post.summary|default(post.content|striptags|truncate(100)) }}
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-muted">
+                                                    {{ post.date_posted.strftime('%B %d, %Y') }}
+                                                </small>
+                                                <span class="badge bg-light text-dark">
+                                                    {{ post.comments|length }} <i class="bi bi-chat-text"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="text-center py-5">
+                                <i class="bi bi-journal-text display-4 text-muted mb-3"></i>
+                                <p class="text-muted">No posts yet.</p>
+                                {% if current_user == user %}
+                                    <a href="{{ url_for('posts.new_post') }}" class="btn btn-primary">
+                                        <i class="bi bi-plus-lg"></i> Create Your First Post
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Comments Tab -->
+                <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                    <h4 class="h5 mb-3">Recent Comments</h4>
+                    {% if user.comments %}
+                        {% for comment in user.comments|sort(attribute='date_posted', reverse=true) %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <small class="text-muted">
+                                        On <a href="{{ url_for('posts.post', post_id=comment.post.id) }}" 
+                                              class="text-decoration-none">
+                                            {{ comment.post.title }}
+                                        </a>
+                                    </small>
+                                    <small class="text-muted">
+                                        {{ comment.date_posted.strftime('%B %d, %Y') }}
+                                    </small>
+                                </div>
+                                <p class="card-text">{{ comment.content }}</p>
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ url_for('posts.post', post_id=comment.post.id) }}#comment-{{ comment.id }}" 
+                                       class="btn btn-sm btn-outline-secondary">
+                                        View Post
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="bi bi-chat-square-text display-4 text-muted mb-3"></i>
+                            <p class="text-muted">No comments yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Likes Tab -->
+                <div class="tab-pane fade" id="likes" role="tabpanel" aria-labelledby="likes-tab">
+                    <div class="text-center py-5">
+                        <i class="bi bi-heart display-4 text-muted mb-3"></i>
+                        <p class="text-muted">No likes yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    // Activate Bootstrap tabs
+    var triggerTabList = [].slice.call(document.querySelectorAll('#profileTabs button'))
+    triggerTabList.forEach(function (triggerEl) {
+        var tabTrigger = new bootstrap.Tab(triggerEl)
+        
+        triggerEl.addEventListener('click', function (event) {
+            event.preventDefault()
+            tabTrigger.show()
+        })
+    })
+    
+    // Handle tab persistence with URL hash
+    const urlParams = new URLSearchParams(window.location.search);
+    const activeTab = urlParams.get('tab');
+    if (activeTab) {
+        const tabElement = document.getElementById(`${activeTab}-tab`);
+        if (tabElement) {
+            const tab = new bootstrap.Tab(tabElement);
+            tab.show();
+        }
+    }
+    
+    // Update URL when tab changes
+    document.querySelectorAll('#profileTabs button').forEach(tab => {
+        tab.addEventListener('shown.bs.tab', function (event) {
+            const tabId = event.target.id.replace('-tab', '');
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('tab', tabId);
+            window.history.replaceState({}, '', newUrl);
+        });
+    });
+</script>
+{% endblock %}

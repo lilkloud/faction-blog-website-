@@ -1,0 +1,22 @@
+{% macro hero(title=None, subtitle=None, image_url=None, overlay=True, height='70vh', content_class='text-white', container_class='') %}
+{% set bg_style = 'background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9))' if overlay else '' %}
+<section class="hero-section position-relative d-flex align-items-center" 
+         style="{{ bg_style }}; min-height: {{ height }}; background-image: url('{{ image_url or url_for('static', filename='images/hero-bg.jpg') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <div class="container {{ container_class }}">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center {{ content_class }}">
+                {% if title %}
+                <h1 class="display-4 fw-bold mb-3">{{ title }}</h1>
+                {% endif %}
+                {% if subtitle %}
+                <p class="lead mb-4">{{ subtitle }}</p>
+                {% endif %}
+                {% if caller %}
+                    {{ caller() }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="hero-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%); z-index: 1;"></div>
+</section>
+{% endmacro %}

@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% from "components/hero.html" import hero %}
+
+{% block content %}
+<!-- Hero Section with Featured Posts Carousel -->
+{% if featured_posts %}
+<div id="featuredCarousel" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="7000">
+    <div class="carousel-inner">
+        {% for post in featured_posts %}
+        <div class="carousel-item {% if loop.first %}active{% endif %}">
+            {% call hero(
+                title=post.title,
+                subtitle=post.content|striptags|truncate(200),
+                image_url=post.image_url if post.image_url else url_for('static', filename='images/hero-bg.jpg'),
+                height='80vh',
+                container_class='position-relative z-2 py-5'
+            ) %}
+                <span class="badge bg-primary bg-opacity-90 mb-3 px-3 py-2 rounded-pill">Featured</span>
+                <div class="mt-4">
+                    <a href="{{ url_for('main.post', post_id=post.id) }}" class="btn btn-primary btn-lg px-4">
+                        Read More <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            {% endcall %}
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    <div class="carousel-indicators position-absolute bottom-0 mb-4">
+        {% for post in featured_posts %}
+        <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="{{ loop.index0 }}" 
+                class="{% if loop.first %}active{% endif %} rounded-circle" 
+                style="width: 10px; height: 10px;" 
+                aria-current="{% if loop.first %}true{% else %}false{% endif %}" 
+                aria-label="Slide {{ loop.index }}">
+        </button>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+{{ hero(
+    title="Welcome to NEXUS Fashion",
+    subtitle="Discover the latest trends and style inspiration",
+    height='60vh',
+    container_class='position-relative z-2 py-5'
+) }}
+{% endif %}
+
+<!-- Categories Section -->
+<section class="categories-section mb-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2 class="fw-bold">Explore Categories</h2>
+            <p class="text-muted">Discover our latest content by category</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="category-card position-relative rounded-4 overflow-hidden shadow-sm" style="height: 250px;">
+                    <img src="{{ url_for('static', filename='images/fashion-category.jpg') }}" 
+                         alt="Fashion" class="img-fluid w-100 h-100 object-fit-cover">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 bg-dark bg-opacity-75 text-white">
+                        <h3 class="h4 mb-0">Fashion</h3>
+                        <a href="{{ url_for('main.category', category_name='fashion') }}" class="stretched-link text-white text-decoration-none">
+                            <span class="visually-hidden">View Fashion Posts</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card position-relative rounded-4 overflow-hidden" style="height: 250px;">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Beauty" class="img-fluid w-100 h-100 object-fit-cover">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 bg-dark bg-opacity-50 text-white">
+                        <h3 class="h4 mb-0">Beauty</h3>
+                        <a href="{{ url_for('main.category', category_name='beauty') }}" class="stretched-link text-white text-decoration-none">
+                            <span class="visually-hidden">View Beauty Posts</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card position-relative rounded-4 overflow-hidden" style="height: 250px;">
+                    <img src="https://images.unsplash.com/photo-1556910639-8e360260247a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Lifestyle" class="img-fluid w-100 h-100 object-fit-cover">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4 bg-dark bg-opacity-50 text-white">
+                        <h3 class="h4 mb-0">Lifestyle</h3>
+                        <a href="{{ url_for('main.category', category_name='lifestyle') }}" class="stretched-link text-white text-decoration-none">
+                            <span class="visually-hidden">View Lifestyle Posts</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Posts -->
+<!-- Latest Articles -->
+<section id="featured-posts" class="featured-posts mb-5">
+    <div class="container">
+        <div class="section-header mb-5 text-center">
+            <h2 class="fw-bold position-relative d-inline-block">Latest Articles</h2>
+            <p class="text-muted">Discover our most recent fashion and lifestyle stories</p>
+        </div>
+        {% if posts.items %}
+        <div class="row g-4">
+            {% for post in posts.items %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <a href="{{ url_for('main.post', post_id=post.id) }}">
+                        <img src="{{ post.image_url if post.image_url else url_for('static', filename='images/default-post.jpg') }}" 
+                             class="card-img-top" alt="{{ post.title }}" style="height: 200px; object-fit: cover;">
+                    </a>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-primary bg-opacity-10 text-primary me-2">{{ post.category|title }}</span>
+                            <small class="text-muted">{{ post.date_posted.strftime('%B %d, %Y') }}</small>
+                        </div>
+                        <h3 class="h5 card-title">
+                            <a href="{{ url_for('main.post', post_id=post.id) }}" class="text-decoration-none text-dark">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+                        <p class="card-text text-muted">{{ post.content|striptags|truncate(150) }}</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <img src="{{ url_for('static', filename='images/default-avatar.png') }}" 
+                                 alt="Author" class="rounded-circle me-2" width="32" height="32">
+                            <small class="text-muted">By {{ post.author.username }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <div class="mb-3">
+                <i class="bi bi-journal-text display-1 text-muted"></i>
+            </div>
+            <h3 class="h4">No articles found</h3>
+            <p class="text-muted">Check back later for new content!</p>
+        </div>
+        {% endif %}
+        
+        <div class="row g-4">
+            {% for post in posts.items %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="position-relative">
+                        <img src="{{ post.image_url if post.image_url else 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" 
+                             class="card-img-top" alt="{{ post.title }}">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-{{ 'primary' if loop.index % 2 == 0 else 'secondary' }} text-uppercase">
+                                {{ post.category if post.category else 'Fashion' }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" 
+                                 class="rounded-circle me-2" width="32" height="32" alt="{{ post.author.username }}">
+                            <div>
+                                <h6 class="mb-0">{{ post.author.username }}</h6>
+                                <small class="text-muted">{{ post.date_posted.strftime('%b %d, %Y') }}</small>
+                            </div>
+                        </div>
+                        <h3 class="h5 card-title">
+                            <a href="{{ url_for('posts.post', post_id=post.id) }}" class="text-decoration-none text-dark">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+                        <p class="card-text text-muted">{{ post.content|striptags|truncate(150) }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ url_for('posts.post', post_id=post.id) }}" class="btn btn-link text-primary p-0 text-decoration-none">
+                                Read More <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                            <div class="text-muted">
+                                <i class="bi bi-chat me-1"></i> {{ post.comments|length }}
+                                <i class="bi bi-heart ms-3 me-1"></i> {{ post.likes|length }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if posts.pages > 1 %}
+        <nav aria-label="Blog pagination" class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if posts.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.home', page=posts.prev_num) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+                {% endif %}
+                
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if posts.page == page_num %}
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('main.home', page=posts.next_num) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="p-4 p-lg-5 bg-white rounded-4 shadow-sm">
+                    <i class="bi bi-envelope-open display-4 text-primary mb-3"></i>
+                    <h2 class="h1 mb-3">Stay Updated</h2>
+                    <p class="lead mb-4">Subscribe to our newsletter and never miss our latest fashion tips and style inspiration.</p>
+                    <form class="row g-2 justify-content-center">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <input type="email" class="form-control form-control-lg" placeholder="Your email address" required>
+                                <button class="btn btn-primary px-4" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="small text-muted mt-3 mb-0">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
