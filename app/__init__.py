@@ -22,17 +22,27 @@ mail = Mail()
 def create_app():
     app = Flask(__name__)
     
+    # Load environment variables from .env file if it exists
+    from dotenv import load_dotenv
+    load_dotenv()
+    
     # Configuration
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'dev-key-123'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-123')
+    
+    # Database configuration
+    if os.environ.get('DATABASE_URL'):
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL'].replace('postgres://', 'postgresql://')
+    else:
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+    
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     # Email configuration
     app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.googlemail.com')
     app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', '587'))
     app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS', 'true').lower() in ['true', 'on', '1']
-    app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-    app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
+    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
     
     # Initialize extensions
     db.init_app(app)

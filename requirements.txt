@@ -1,39 +1,23 @@
-# Core Flask
 Flask==2.3.3
 Werkzeug==2.3.7
 Jinja2==3.1.2
 itsdangerous==2.1.2
 click==8.1.7
-
-# Database
 Flask-SQLAlchemy==3.1.1
 SQLAlchemy==2.0.23
 alembic==1.13.1
 psycopg2-binary==2.9.9
-
-# Authentication & Security
 Flask-Login==0.6.2
 Flask-WTF==1.2.1
 email-validator==2.1.0
 bcrypt==4.1.2
-
-# Forms & Admin
-Flask-WTF==1.2.1
+Flask-Bcrypt==1.0.1
 python-dotenv==1.0.0
-
-# File Processing
+WTForms==3.0.1
 Pillow==10.1.0
 python-slugify==8.0.1
-
-# Email
 Flask-Mail==0.9.1
-
-# CORS (if needed)
 Flask-Cors==4.0.0
-
-# Production Server
+Flask-CKEditor==0.4.6
 gunicorn==21.2.0
-
-# Development (not for production)
-# Faker==19.13.0
-# pytest==7.4.3
+Flask-Migrate==4.0.5

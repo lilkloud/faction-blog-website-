@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-4">
                 <div class="category-card position-relative rounded-4 overflow-hidden" style="height: 250px;">
-                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                    <img src="{{ url_for('static', filename='images/categories/beauty-category.jpg') }}" 
                          alt="Beauty" class="img-fluid w-100 h-100 object-fit-cover">
                     <div class="position-absolute bottom-0 start-0 w-100 p-4 bg-dark bg-opacity-50 text-white">
                         <h3 class="h4 mb-0">Beauty</h3>
@@ -87,7 +87,7 @@
             </div>
             <div class="col-md-4">
                 <div class="category-card position-relative rounded-4 overflow-hidden" style="height: 250px;">
-                    <img src="https://images.unsplash.com/photo-1556910639-8e360260247a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                    <img src="{{ url_for('static', filename='images/categories/lifestyle-category.jpg') }}" 
                          alt="Lifestyle" class="img-fluid w-100 h-100 object-fit-cover">
                     <div class="position-absolute bottom-0 start-0 w-100 p-4 bg-dark bg-opacity-50 text-white">
                         <h3 class="h4 mb-0">Lifestyle</h3>
@@ -130,8 +130,12 @@
                         </h3>
                         <p class="card-text text-muted">{{ post.content|striptags|truncate(150) }}</p>
                         <div class="d-flex align-items-center mt-3">
-                            <img src="{{ url_for('static', filename='images/default-avatar.png') }}" 
-                                 alt="Author" class="rounded-circle me-2" width="32" height="32">
+                            <img src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" 
+                                 alt="{{ post.author.username }}" 
+                                 class="rounded-circle me-2" 
+                                 width="32" 
+                                 height="32"
+                                 onerror="this.onerror=null; this.src='{{ url_for('static', filename='profile_pics/default.jpg') }}'">
                             <small class="text-muted">By {{ post.author.username }}</small>
                         </div>
                     </div>

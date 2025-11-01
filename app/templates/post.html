@@ -78,12 +78,13 @@
                 
                 <div class="position-relative mb-5" style="height: 500px; border-radius: 1rem; overflow: hidden;">
                     <div class="position-relative h-100">
-                        <img src="{{ post.image_url or 'https://source.unsplash.com/random/1200x800?fashion' }}" 
+                        <img src="{{ post.image_url or url_for('static', filename='images/hero-bg.jpg') }}" 
                              class="w-100 h-100 object-fit-cover" 
                              alt="{{ post.title }}"
-                             id="featuredImage">
+                             id="featuredImage"
+                             style="object-position: center;">
                         <button class="btn btn-light position-absolute bottom-0 end-0 m-3 rounded-circle shadow-sm pin-it"
-                                data-img-src="{{ post.image_url or 'https://source.unsplash.com/random/1200x800?fashion' }}"
+                                data-img-src="{{ post.image_url or url_for('static', filename='images/hero-bg.jpg') }}"
                                 data-img-alt="{{ post.title }}"
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="left"
@@ -239,11 +240,12 @@
                         <div class="comment-list">
                             <!-- Comment 1 -->
                             <div class="d-flex mb-4">
-                                <img src="https://randomuser.me/api/portraits/women/43.jpg" 
+                                <img src="{{ url_for('static', filename='profile_pics/default.jpg') }}" 
                                      class="rounded-circle me-3" 
                                      width="48" 
                                      height="48" 
-                                     alt="User">
+                                     alt="User"
+                                     style="object-fit: cover;">
                                 <div>
                                     <div class="d-flex align-items-center mb-1">
                                         <h6 class="mb-0 me-2">Jessica Parker</h6>

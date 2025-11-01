@@ -20,14 +20,14 @@
         <div class="row g-4 align-items-center">
             <div class="col-lg-6">
                 <div class="position-relative overflow-hidden rounded-4" style="height: 100%; min-height: 400px;">
-                    <img src="https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                    <img src="{{ url_for('static', filename='images/hero-bg.jpg') }}" 
                          class="w-100 h-100 object-fit-cover" 
                          alt="Fashion Trends">
                     <div class="position-absolute bottom-0 start-0 p-4 text-white" style="background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%); width: 100%;">
                         <span class="badge bg-primary mb-2">Trending</span>
                         <h2 class="h3 mb-3">Spring/Summer 2024: The Ultimate Style Guide</h2>
                         <div class="d-flex align-items-center">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle me-2" width="32" height="32" alt="Author">
+                            <img src="{{ url_for('static', filename='profile_pics/default.jpg') }}" class="rounded-circle me-2" width="32" height="32" alt="Author">
                             <span class="me-3">Sarah Johnson</span>
                             <small class="text-white-50">May 15, 2024</small>
                         </div>
@@ -39,7 +39,7 @@
                     <div class="col-md-6">
                         <div class="card border-0 h-100">
                             <div class="position-relative" style="height: 180px; overflow: hidden;">
-                                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                <img src="{{ url_for('static', filename='images/beauty-tips.jpg') }}" 
                                      class="card-img-top h-100 w-100 object-fit-cover" 
                                      alt="Beauty Tips">
                             </div>
@@ -53,7 +53,7 @@
                     <div class="col-md-6">
                         <div class="card border-0 h-100">
                             <div class="position-relative" style="height: 180px; overflow: hidden;">
-                                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                <img src="{{ url_for('static', filename='images/lifestyle.jpg') }}" 
                                      class="card-img-top h-100 w-100 object-fit-cover" 
                                      alt="Lifestyle">
                             </div>
@@ -68,7 +68,7 @@
                         <div class="card border-0 bg-light">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                    <img src="{{ url_for('static', filename='images/accessories.jpg') }}" 
                                          class="img-fluid rounded-start h-100 object-fit-cover" 
                                          alt="Fashion Accessories">
                                 </div>
