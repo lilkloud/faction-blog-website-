@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_mail import Mail
 from datetime import datetime
 import os
+import re
 from flask_wtf.csrf import CSRFProtect
 
 # Initialize extensions
@@ -31,8 +32,13 @@ def create_app():
     
     # Database configuration
     if os.environ.get('DATABASE_URL'):
-        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL'].replace('postgres://', 'postgresql://')
+        # Handle Heroku's postgres URL format
+        uri = os.environ.get('DATABASE_URL')
+        if uri.startswith('postgres://'):
+            uri = uri.replace('postgres://', 'postgresql://', 1)
+        app.config['SQLALCHEMY_DATABASE_URI'] = uri
     else:
+        # Use SQLite for development
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
     
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -44,10 +50,21 @@ def create_app():
     app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
     app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
     
-    # Initialize extensions
-    db.init_app(app)
-    login_manager.init_app(app)
-    ckeditor.init_app(app)
+    # Initialize extensions with app
+    with app.app_context():
+        db.init_app(app)
+        login_manager.init_app(app)
+        ckeditor.init_app(app)
+        
+        # Import models here to avoid circular imports
+        from .models import User, Post, Comment, Like, Notification
+        
+        # Create tables if they don't exist
+        if os.environ.get('FLASK_ENV') != 'production' or os.environ.get('DATABASE_URL'):
+            try:
+                db.create_all()
+            except Exception as e:
+                print(f"Error creating database tables: {e}")
     migrate = Migrate(app, db)  # Initialize migrate with app and db
     mail.init_app(app)
     csrf.init_app(app)
